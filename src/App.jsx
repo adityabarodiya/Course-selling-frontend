@@ -2,35 +2,20 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import "./App.css";
 import Signup from "./components/Signup";
- import Appbar from "./components/Appbar"
- import Login from "./components/Login"
+import Appbar from "./components/Appbar";
+import Login from "./components/Login";
 
 function App() {
   return (
     <>
-      <div>
-        <Appbar></Appbar>
-      </div>
-      <div>
-        <Signup></Signup>
-      </div>
+      <Appbar></Appbar>
 
-
-
-
-
-
-
-
-      {/* <Router>
+      <Router>
         <Routes>
-          <Route path="/" element={<Landing />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/register" element={<Register />} />
-          <Route path="/about" element={<CreateCourse />} />
-          <Route path="/courses" element={<ShowCourses />} />
+          <Route path="/signup" element={<Signup />} />
         </Routes>
-      </Router> */}
+      </Router>
     </>
   );
 }

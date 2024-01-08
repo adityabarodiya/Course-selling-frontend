@@ -5,7 +5,7 @@ import Typography from "@mui/material/Typography";
 
 function Signup() {
   return (
-    <div style={{display: "flex", justifyContent: "center"}}>
+    <div style={{ display: "flex", justifyContent: "center" }}>
       <div>
         <div style={{ marginTop: 80, marginBottom: 10 }}>
           <Typography variant="h6" component="h5">
@@ -15,14 +15,14 @@ function Signup() {
 
         <Card variant="outlined" style={{ width: 400, padding: 20 }}>
           <TextField
-            id="outlined-basic"
+            id="user"
             fullWidth={true}
             label="Email"
             variant="outlined"
           />
           <br /> <br />
           <TextField
-            id="outlined-basic"
+            id="paas"
             fullWidth={true}
             label="Password"
             variant="outlined"
@@ -30,9 +30,26 @@ function Signup() {
           />
           <br />
           <br />
-          <Button variant="contained">Sign Up</Button>
-        </Card>
+          <Button
+            variant="contained"
+            onClick={() => {
+              let username = document.getElementById("user").value;
+              let password = document.getElementById("paas").value;
 
+              fetch("http://localhost:3000/admin/signup", {
+                method: "POST",
+                body: JSON.stringify({
+                  username,
+                  password,
+                }),
+              });
+
+
+            }}
+          >
+            Sign Up
+          </Button>
+        </Card>
       </div>
     </div>
   );
