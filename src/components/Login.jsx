@@ -30,7 +30,18 @@ function Login() {
           />
           <br />
           <br />
-          <Button variant="contained">Sign in</Button>
+          <Button variant="contained" onClick={()=>{
+            fetch("http://localhost:3000/admin/login", {
+              method: "POST",
+              body: JSON.stringify({
+                username,
+                password,
+              }),
+              headers: {
+                "Content-type": "application/json",
+              },
+            });
+          }}>Sign in</Button>
         </Card>
       </div>
     </div>

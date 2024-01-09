@@ -4,16 +4,18 @@ import "./App.css";
 import Signup from "./components/Signup";
 import Appbar from "./components/Appbar";
 import Login from "./components/Login";
+import AddCourse from "./components/AddCourse";
 
 function App() {
   return (
     <>
-      <Appbar></Appbar>
+      <Appbar/>
 
       <Router>
         <Routes>
-          <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/addcourse" element={<AddCourse/>} />
+          <Route path="/login" element={<Login/>} />
+          <Route path="/signup" element={<Signup/>} />
         </Routes>
       </Router>
     </>

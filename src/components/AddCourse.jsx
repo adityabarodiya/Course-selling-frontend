@@ -4,37 +4,36 @@ import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 
-function Signup() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+function AddCourse() {
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div>
         <div style={{ marginTop: 80, marginBottom: 10 }}>
           <Typography variant="h6" component="h5">
-            Welcome to Cursera. Sign Up below
+            Welcome to Cursera. Add Course below
           </Typography>
         </div>
 
         <Card variant="outlined" style={{ width: 400, padding: 20 }}>
           <TextField
             onChange={(e) => {
-              setEmail(e.target.value);
+              setTitle(e.target.value);
             }}
             fullWidth={true}
-            label="Email"
+            label="Title"
             variant="outlined"
           />
           <br /> <br />
           <TextField
             onChange={(e) => {
-              setPassword(e.target.value);
+              setDescription(e.target.value);
             }}
             fullWidth={true}
-            label="Password"
+            label="Description"
             variant="outlined"
-            type="password"
           />
           <br />
           <br />
@@ -44,14 +43,15 @@ function Signup() {
               // let username = document.getElementById("user").value;
               // let password = document.getElementById("paas").value;
 
-              fetch("http://localhost:3000/admin/signup", {
+              fetch("http://localhost:3000/admin/courses", {
                 method: "POST",
                 body: JSON.stringify({
-                  username: email,
-                  password: password,
+                  title: title,
+                  description: description,
                 }),
                 headers: {
                   "Content-type": "application/json",
+                  "Authorization": "Bearer " + localStorage.getItem("token"),
                 },
               })
                 .then((res) => {
@@ -62,7 +62,7 @@ function Signup() {
                 });
             }}
           >
-            Sign Up
+            Add Course
           </Button>
         </Card>
       </div>
@@ -70,4 +70,4 @@ function Signup() {
   );
 }
 
-export default Signup;
+export default AddCourse;
