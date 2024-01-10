@@ -7,6 +7,7 @@ import { useState } from "react";
 function AddCourse() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+  const [price, setPrice] = useState("");
 
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
@@ -37,6 +38,16 @@ function AddCourse() {
           />
           <br />
           <br />
+          <TextField
+            onChange={(e) => {
+              setPrice(e.target.value);
+            }}
+            fullWidth={true}
+            label="Price"
+            variant="outlined"
+          />
+          <br />
+          <br />
           <Button
             variant="contained"
             onClick={() => {
@@ -48,10 +59,11 @@ function AddCourse() {
                 body: JSON.stringify({
                   title: title,
                   description: description,
+                  price: price,
                 }),
                 headers: {
                   "Content-type": "application/json",
-                  "Authorization": "Bearer " + localStorage.getItem("token"),
+                  Authorization: "Bearer " + localStorage.getItem("token"),
                 },
               })
                 .then((res) => {

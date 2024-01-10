@@ -11,6 +11,7 @@ function Signup() {
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div>
+        {email}
         <div style={{ marginTop: 80, marginBottom: 10 }}>
           <Typography variant="h6" component="h5">
             Welcome to Cursera. Sign Up below
@@ -40,11 +41,32 @@ function Signup() {
           <br />
           <Button
             variant="contained"
-            onClick={() => {
-              // let username = document.getElementById("user").value;
-              // let password = document.getElementById("paas").value;
+          //   onClick={() => {
+          //     // let username = document.getElementById("user").value;
+          //     // let password = document.getElementById("paas").value;
 
-              fetch("http://localhost:3000/admin/signup", {
+          //     fetch("http://localhost:3000/admin/signup", {
+          //       method: "POST",
+          //       body: JSON.stringify({
+          //         username: email,
+          //         password: password,
+          //       }),
+          //       headers: {
+          //         "Content-type": "application/json",
+          //       },
+          //     })
+          //       .then((res) => {
+          //         res.json();
+          //       })
+          //       .then((data) => {
+          //         localStorage.setItem("token", data.token);
+          //       });
+          //   }
+          // }
+
+          onClick={async () => {
+            try {
+              const response = await fetch("http://localhost:3000/admin/signup", {
                 method: "POST",
                 body: JSON.stringify({
                   username: email,
@@ -53,14 +75,19 @@ function Signup() {
                 headers: {
                   "Content-type": "application/json",
                 },
-              })
-                .then((res) => {
-                  return res.json();
-                })
-                .then((data) => {
-                  localStorage.setItem("token", data.token);
-                });
-            }}
+              });
+          
+
+
+                const data = await response.json();
+                localStorage.setItem("token", data.token);
+            } catch (error) {
+                console.error("Error during signup:", error);
+                // Handle the error gracefully, e.g., display an error message to the user
+            }
+        }}
+        
+
           >
             Sign Up
           </Button>

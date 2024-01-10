@@ -14,7 +14,7 @@ function Login() {
         </div>
 
         <Card variant="outlined" style={{ width: 400, padding: 20 }}>
-        <TextField
+          <TextField
             id="user"
             fullWidth={true}
             label="Email"
@@ -30,18 +30,23 @@ function Login() {
           />
           <br />
           <br />
-          <Button variant="contained" onClick={()=>{
-            fetch("http://localhost:3000/admin/login", {
-              method: "POST",
-              body: JSON.stringify({
-                username,
-                password,
-              }),
-              headers: {
-                "Content-type": "application/json",
-              },
-            });
-          }}>Sign in</Button>
+          <Button
+            variant="contained"
+            onClick={() => {
+              fetch("http://localhost:3000/admin/login", {
+                method: "POST",
+                body: JSON.stringify({
+                  username,
+                  password,
+                }),
+                headers: {
+                  "Content-type": "application/json",
+                },
+              });
+            }}
+          >
+            Sign in
+          </Button>
         </Card>
       </div>
     </div>

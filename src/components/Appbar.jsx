@@ -2,9 +2,11 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function Appbar() {
+
+  const navigate = useNavigate()
   return (
     <>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -18,7 +20,7 @@ function Appbar() {
             <Button
               variant="contained"
               onClick={() => {
-                window.location = "/signup";
+                navigate("/signup");
               }}
             >
               Sign Up
@@ -28,7 +30,7 @@ function Appbar() {
             <Button
               variant="contained"
               onClick={() => {
-                window.location = "/login";
+                navigate("/login");
               }}
             >
               Login

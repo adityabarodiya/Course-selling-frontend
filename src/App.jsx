@@ -9,9 +9,10 @@ import AddCourse from "./components/AddCourse";
 function App() {
   return (
     <>
-      <Appbar/>
 
       <Router>
+      <Appbar/>
+
         <Routes>
           <Route path="/addcourse" element={<AddCourse/>} />
           <Route path="/login" element={<Login/>} />
