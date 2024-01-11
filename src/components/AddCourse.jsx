@@ -70,7 +70,7 @@ function AddCourse() {
                   return res.json();
                 })
                 .then((data) => {
-                  localStorage.setItem("token", data.token);
+                    alert("Course Added");                  
                 });
             }}
           >
