@@ -50,18 +50,17 @@ We will be covering this in the extra class next week but would be good for you 
    Description: Lists all the courses purchased by the user.
    Input: Headers: { 'Authorization': 'Bearer jwt_token_here' }
    Output: { purchasedCourses: [ { id: 1, title: 'course title', description: 'course description', price: 100, imageLink: 'https://linktoimage.com', published: true }, ... ] }
-
 */
 import express from "express";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
-import cors from "cors"
+import cors from "cors";
 
 // const jwt = require("jsonwebtoken");
 // const mongoose = require("mongoose");
 const app = express();
 
-app.use(cors())
+app.use(cors());
 
 app.use(express.json());
 
@@ -79,7 +78,7 @@ const adminSchema = new mongoose.Schema({
 const courseSchema = new mongoose.Schema({
   title: String,
   description: String,
-  price: Number
+  price: Number,
 });
 // Define mongoose models
 const User = mongoose.model("User", userSchema);
@@ -108,6 +107,13 @@ const authenticateJwt = (req, res, next) => {
     res.sendStatus(401);
   }
 };
+
+app.get("/admin/me", authenticateJwt, (req, res) => {
+  res.json({
+    username: req.user.username,
+  });
+});
+
 // Admin routes
 app.post("/admin/signup", async (req, res) => {
   // logic to sign up admin

@@ -70,7 +70,7 @@ function AddCourse() {
                   return res.json();
                 })
                 .then((data) => {
-                    alert("Course Added");                  
+                  alert("Course Added");
                 });
             }}
           >
