@@ -80,6 +80,7 @@ const courseSchema = new mongoose.Schema({
   description: String,
   price: Number,
 });
+
 // Define mongoose models
 const User = mongoose.model("User", userSchema);
 const Admin = mongoose.model("Admin", adminSchema);

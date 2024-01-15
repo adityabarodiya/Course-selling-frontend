@@ -21,7 +21,7 @@ function Appbar() {
         });
         const data = await response.json();
         if (data) {
-          console.log(data)
+          console.log(data);
           setUserEmail(data.username);
         }
       } catch (error) {
@@ -41,20 +41,22 @@ function Appbar() {
             <Typography variant="h6">Cursera</Typography>
           </div>
 
-          <div>{userEmail}</div>
+          <div>
+            {" "}
+            <Typography variant="h6">Admin id: {userEmail}</Typography>
+          </div>
 
           <div style={{ display: "flex" }}>
-            
-          <div style={{marginRight: 10}}>
-            <Button
-              variant="contained"
-              onClick={() => {
-                navigate("/addcourse");
-              }}
-            >
-              Add Course
-            </Button>
-          </div>
+            <div style={{ marginRight: 10 }}>
+              <Button
+                variant="contained"
+                onClick={() => {
+                  navigate("/addcourse");
+                }}
+              >
+                Add Course
+              </Button>
+            </div>
             <div style={{ marginRight: 10 }}>
               <Button
                 variant="contained"
@@ -66,7 +68,6 @@ function Appbar() {
                 Logout
               </Button>
             </div>
-
           </div>
         </div>
       </>
