@@ -2,8 +2,12 @@ import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
+import { useState } from "react";
 
 function Login() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   return (
     <div style={{ display: "flex", justifyContent: "center" }}>
       <div>
@@ -16,6 +20,9 @@ function Login() {
         <Card variant="outlined" style={{ width: 400, padding: 20 }}>
           <TextField
             id="user"
+            onChange={(e)=>{
+              setEmail(e.target.value);
+            }}
             fullWidth={true}
             label="Email"
             variant="outlined"
@@ -23,6 +30,9 @@ function Login() {
           <br /> <br />
           <TextField
             id="paas"
+            onChange={(e)=>{
+              setPassword(e.target.value);
+            }}
             fullWidth={true}
             label="Password"
             variant="outlined"
@@ -32,17 +42,28 @@ function Login() {
           <br />
           <Button
             variant="contained"
-            onClick={() => {
-              fetch("http://localhost:3000/admin/login", {
-                method: "POST",
-                body: JSON.stringify({
-                  username,
-                  password,
-                }),
-                headers: {
-                  "Content-type": "application/json",
-                },
-              });
+            onClick={async () => {
+              try {
+                const response = await fetch(
+                  "http://localhost:3000/admin/login",
+                  {
+                    method: "POST",
+
+                    headers: {
+                      "Content-type": "application/json",
+                      username: email,
+                      password: password,
+                    },
+                  }
+                );
+                const data = await response.json();
+                localStorage.setItem("token", data.token);
+                window.location = "/";
+                alert("Succusfully login")
+              } catch (error) {
+                console.error("Error during Login:", error);
+                // Handle the error gracefully, e.g., display an error message to the user
+              }
             }}
           >
             Sign in

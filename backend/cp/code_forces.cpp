@@ -35,31 +35,27 @@ void inputArr(vi &v)
 
 void solve()
 {
+    int n, f, a, b;
+    cin >> n >> f >> a >> b;
 
-    int n;
-    // cin >> n;
-}
+    vi v(n);
 
-bool allDigitsEven(long long n)
-{
-    /* Checks if all digits in a long long integer are even. */
+    inputArr(v);
 
-    if (n == 0)
+    int s = f / b;
+    int k = f / a;
+
+    if (s > n or k > n)
     {
-        return true; // Handle zero case
-    }
-
-    while (n > 0)
-    {
-        int digit = n % 10;
-        if (digit % 2 != 0)
-        { // If any digit is odd, return false
-            return false;
+        if (s > 0)
+        {
+            yes;
         }
-        n /= 10; // Remove the last digit
+        else no;
     }
 
-    return true; // If all digits are even, return true
+    else
+        no;
 }
 
 int32_t main()
@@ -71,20 +67,8 @@ int32_t main()
 
     int t;
     cin >> t;
-    for(int i = 0; i <= t; ++i){
-        for (int j = i; j < t+1; j++)
-        {
-            for (int k = 0; k < t+1; k++)
-            {
-                if((i + j + k) == t){
-                    print(i);print(j);print(k);
-                    cout<<endl;
-                }
-            }
-            
-        }
-        
-    }
+    while (t--)
+        solve();
 
     return 0;
 }
