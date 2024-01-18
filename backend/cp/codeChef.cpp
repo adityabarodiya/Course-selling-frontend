@@ -35,38 +35,40 @@ void inputArr(vi &v)
 
 void solve()
 {
-    int a, b, x, y;
-    cin >> a >> b >> x >> y;
+    int N;
+    cin >> N;
 
-    int count = 0;
-
-
-    while (1)
+    vector<int> v(N);
+    for (int i = 0; i < N; i++)
     {
-        if(b > y){
-            println(-1);
-            return;
-        }
-        if(a == x || y == b){
-            break;
-        }
-        count++;
-        a++;
-        b++;
+        cin >> v[i];
     }
 
-    if(b == y){
-    count += abs(x-a);
+    if (N == 1 || N == 2)
+    {
+        println(-1);
+        return;
+    }
 
-    }else count += (y-x)*2;
+    vi ans(0);
 
-    println(abs(count));
-    
+    for (int i : v)
+    {
+        if (i == 1)
+            ans.pb(3);
+        else if (i == 3)
+            ans.pb(1);
+        else
+            ans.pb(i);
+    }
 
+    // println(n);
+    printArr(ans);
 }
 
 int32_t main()
 {
+
     // for fast input and output
     ios_base::sync_with_stdio(0);
     cin.tie(0);

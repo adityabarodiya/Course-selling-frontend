@@ -127,7 +127,7 @@ app.post("/admin/signup", async (req, res) => {
     const newAdmin = new Admin({ username, password });
     await newAdmin.save();
     const token = jwt.sign({ username, role: "admin" }, SECRET, {
-      expiresIn: "1h",
+      expiresIn: "12h",
     });
     res.json({ massage: "Admin Created succesfully", token });
   }

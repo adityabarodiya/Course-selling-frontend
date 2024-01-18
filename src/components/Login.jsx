@@ -20,7 +20,7 @@ function Login() {
         <Card variant="outlined" style={{ width: 400, padding: 20 }}>
           <TextField
             id="user"
-            onChange={(e)=>{
+            onChange={(e) => {
               setEmail(e.target.value);
             }}
             fullWidth={true}
@@ -30,7 +30,7 @@ function Login() {
           <br /> <br />
           <TextField
             id="paas"
-            onChange={(e)=>{
+            onChange={(e) => {
               setPassword(e.target.value);
             }}
             fullWidth={true}
@@ -59,10 +59,11 @@ function Login() {
                 const data = await response.json();
                 localStorage.setItem("token", data.token);
                 window.location = "/";
-                alert("Succusfully login")
+                alert("Succusfully login");
               } catch (error) {
-                console.error("Error during Login:", error);
                 // Handle the error gracefully, e.g., display an error message to the user
+
+                console.error("Error during Login:", error);
               }
             }}
           >
