@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import {url} from "./Appbar"
 import Typography from "@mui/material/Typography";
 
-function Courese() {
+function Course() {
   let { courseId } = useParams();
   const [courses, setCourse] = useState([]);
 
@@ -180,4 +180,4 @@ function UpdateCard({ currentCourse, setCourse, courses }) {
     </div>
   );
 }
-export default Courese;
+export default Course;

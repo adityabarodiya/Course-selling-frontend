@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
-import {url} from "./Appbar"
-
-
+import { url } from "./Appbar";
 import "./Courese.css";
 
 function Courses() {
+  const navigate = useNavigate(); // useNavigate hook for programmatic navigation
   const [course, setCourse] = useState([]);
 
   useEffect(() => {
@@ -19,10 +19,9 @@ function Courses() {
         });
         const data = await response.json();
         if (Array.isArray(data.courses)) {
-
           const coursesWithNewKey = data.courses.map((course) => ({
             ...course,
-            imageLink: "https://www.thinknexttraining.com/images/Full-Stack-Development-Course-in-Chandigargh-mob-min.jpg", // Replace "someValue" with the actual value you want to add
+            imageLink: "https://www.thinknexttraining.com/images/Full-Stack-Development-Course-in-Chandigargh-mob-min.jpg",
           }));
           setCourse(coursesWithNewKey);
         } else {
@@ -34,28 +33,28 @@ function Courses() {
     };
 
     fetchData();
-  },[]);
+  }, []);
+
+  const handleCourseClick = (id) => {
+    // Use the navigate function to programmatically navigate to the course details page
+    navigate(`/course/${id}`);
+  };
 
   return (
     <>
-    
-
-    <div className="card-grid-container">
-      {course.map((course, index) => (
-        <div key={index} className="course-card">
-          <img src={course.imageLink} alt={course.title} className="course-image" />
-          <div className="course-details">
-            <Typography>{course.title}</Typography>
-            <Typography>{course.description}</Typography>
-            <Typography>Price: ${course.price}</Typography>
-           
-            {/* Add any additional details you want to display */}
+      <div className="card-grid-container">
+        {course.map((course, index) => (
+          <div key={index} className="course-card" onClick={() => handleCourseClick(course._id)}>
+            {/* Use onClick to call handleCourseClick when the card is clicked */}
+            <img src={course.imageLink} alt={course.title} className="course-image" />
+            <div className="course-details">
+              <Typography>{course.title}</Typography>
+              <Typography>{course.description}</Typography>
+              <Typography>Price: ${course.price}</Typography>
+            </div>
           </div>
-        </div>
-      ))}
-    </div>
-
-
+        ))}
+      </div>
     </>
   );
 }
