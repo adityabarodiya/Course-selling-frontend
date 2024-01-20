@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import {url} from "./Appbar"
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -45,7 +46,7 @@ function Login() {
             onClick={async () => {
               try {
                 const response = await fetch(
-                  "http://localhost:3000/admin/login",
+                  `${url}/admin/login`,
                   {
                     method: "POST",
 

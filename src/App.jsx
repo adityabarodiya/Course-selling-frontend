@@ -15,7 +15,7 @@ function App() {
       
 
       <Router>
-        <Appbar />
+        <Appbar/>
 
         <Routes>
           <Route path="/addcourse" element={<AddCourse />} />

@@ -6,6 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import React, { useEffect } from "react";
 
+let url = "http://localhost:3000";
+//url = "https://coursra.cyclic.app";
+
 function Appbar() {
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState(null);
@@ -13,7 +16,7 @@ function Appbar() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("http://localhost:3000/admin/me", {
+        const response = await fetch(`${url}/admin/me`, {
           method: "GET",
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -38,7 +41,7 @@ function Appbar() {
       <>
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           <div>
-            <Typography variant="h6">Cursera</Typography>
+            <Typography variant="h6">Coursra</Typography>
           </div>
 
           <div>
@@ -108,4 +111,5 @@ function Appbar() {
   );
 }
 
+export {url}
 export default Appbar;

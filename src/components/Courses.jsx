@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import Typography from "@mui/material/Typography";
+import {url} from "./Appbar"
+
 
 import "./Courese.css";
 
@@ -9,7 +11,7 @@ function Courses() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/admin/courses`, {
+        const response = await fetch(`${url}/admin/courses`, {
           method: "GET",
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),

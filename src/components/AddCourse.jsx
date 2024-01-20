@@ -3,6 +3,8 @@ import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import {url} from "./Appbar"
+
 
 function AddCourse() {
   const [title, setTitle] = useState("");
@@ -54,7 +56,7 @@ function AddCourse() {
               // let username = document.getElementById("user").value;
               // let password = document.getElementById("paas").value;
 
-              fetch("http://localhost:3000/admin/courses", {
+              fetch(`${url}/admin/courses`, {
                 method: "POST",
                 body: JSON.stringify({
                   title: title,

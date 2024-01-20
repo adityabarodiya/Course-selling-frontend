@@ -3,6 +3,7 @@ import TextField from "@mui/material/TextField";
 import Card from "@mui/material/Card";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
+import { url } from "./Appbar";
 
 function Signup() {
   const [email, setEmail] = useState("");
@@ -41,51 +42,49 @@ function Signup() {
           <br />
           <Button
             variant="contained"
-          //   onClick={() => {
-          //     // let username = document.getElementById("user").value;
-          //     // let password = document.getElementById("paas").value;
+            //   onClick={() => {
+            //     // let username = document.getElementById("user").value;
+            //     // let password = document.getElementById("paas").value;
 
-          //     fetch("http://localhost:3000/admin/signup", {
-          //       method: "POST",
-          //       body: JSON.stringify({
-          //         username: email,
-          //         password: password,
-          //       }),
-          //       headers: {
-          //         "Content-type": "application/json",
-          //       },
-          //     })
-          //       .then((res) => {
-          //         res.json();
-          //       })
-          //       .then((data) => {
-          //         localStorage.setItem("token", data.token);
-          //       });
-          //   }
-          // }
+            //     fetch("http://localhost:3000/admin/signup", {
+            //       method: "POST",
+            //       body: JSON.stringify({
+            //         username: email,
+            //         password: password,
+            //       }),
+            //       headers: {
+            //         "Content-type": "application/json",
+            //       },
+            //     })
+            //       .then((res) => {
+            //         res.json();
+            //       })
+            //       .then((data) => {
+            //         localStorage.setItem("token", data.token);
+            //       });
+            //   }
+            // }
 
-          onClick={async () => {
-            try {
-              const response = await fetch("http://localhost:3000/admin/signup", {
-                method: "POST",
-                body: JSON.stringify({
-                  username: email,
-                  password: password,
-                }),
-                headers: {
-                  "Content-type": "application/json",
-                },
-              });
+            onClick={async () => {
+              try {
+                const response = await fetch(`${url}/admin/signup`, {
+                  method: "POST",
+                  body: JSON.stringify({
+                    username: email,
+                    password: password,
+                  }),
+                  headers: {
+                    "Content-type": "application/json",
+                  },
+                });
                 const data = await response.json();
                 localStorage.setItem("token", data.token);
-                window.location = "/"
-            } catch (error) {
+                window.location = "/";
+              } catch (error) {
                 console.error("Error during signup:", error);
                 // Handle the error gracefully, e.g., display an error message to the user
-            }
-        }}
-        
-
+              }
+            }}
           >
             Sign Up
           </Button>

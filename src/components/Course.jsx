@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-
+import {url} from "./Appbar"
 import Typography from "@mui/material/Typography";
 
 function Courese() {
@@ -13,7 +13,7 @@ function Courese() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`http://localhost:3000/admin/courses`, {
+        const response = await fetch(`${url}/admin/courses`, {
           method: "GET",
           headers: {
             Authorization: "Bearer " + localStorage.getItem("token"),
@@ -137,7 +137,7 @@ function UpdateCard({ currentCourse, setCourse, courses }) {
               // let password = document.getElementById("paas").value;
 
               fetch(
-                "http://localhost:3000/admin/courses/" + currentCourse._id,
+                `${url}/admin/courses/` + currentCourse._id,
                 {
                   method: "PUT",
                   body: JSON.stringify({
