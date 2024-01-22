@@ -19,7 +19,7 @@ function Signup() {
           </Typography>
         </div>
 
-        <Card variant="outlined" style={{ width: 400, padding: 20 }}>
+        <Card variant="outlined" style={{ width: 350, padding: 20 }}>
           <TextField
             onChange={(e) => {
               setEmail(e.target.value);

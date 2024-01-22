@@ -4,6 +4,7 @@ import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import {url} from "./Appbar"
+
 import Typography from "@mui/material/Typography";
 
 function Course() {
@@ -100,7 +101,7 @@ function UpdateCard({ currentCourse, setCourse, courses }) {
           </Typography>
         </div>
 
-        <Card variant="outlined" style={{ width: 400, padding: 20 }}>
+        <Card variant="outlined" style={{ width: 350, padding: 20 }}>
           <TextField
             onChange={(e) => {
               setTitle(e.target.value);

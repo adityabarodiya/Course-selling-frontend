@@ -18,7 +18,7 @@ function Login() {
           </Typography>
         </div>
 
-        <Card variant="outlined" style={{ width: 400, padding: 20 }}>
+        <Card variant="outlined" style={{ width: 350, padding: 20 }}>
           <TextField
             id="user"
             onChange={(e) => {

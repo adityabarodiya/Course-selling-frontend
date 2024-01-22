@@ -1,3 +1,7 @@
+/*
+    Author - Aditya Barodiya
+*/
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -35,40 +39,49 @@ void inputArr(vi &v)
 
 void solve()
 {
-    int N;
-    cin >> N;
+    int n;
+    cin >> n;
+    int m;
+    cin>>m;
+    string s;
+    cin>>s;
+    // vi arr(n);
 
-    vector<int> v(N);
-    for (int i = 0; i < N; i++)
-    {
-        cin >> v[i];
-    }
+    // inputArr(arr);
 
-    if (N == 1 || N == 2)
-    {
-        println(-1);
-        return;
-    }
+    // int one = 0, two = 0;
+    // int xr = 0;
+    // int e = arr[0];
+    // int f = 1;
 
-    vi ans(0);
+    // for (int i : arr)
+    // {
+    //     if (e != i)
+    //         f = 0;
 
-    for (int i : v)
-    {
-        if (i == 1)
-            ans.pb(3);
-        else if (i == 3)
-            ans.pb(1);
-        else
-            ans.pb(i);
-    }
+    //     if (i == 1)
+    //         one++;
+    //     else
+    //         two++;
+    // }
 
-    // println(n);
-    printArr(ans);
+    // if (f)
+    // {
+    //     println(1);
+    //     return;
+    // }
+
+    // if (one > two)
+    // {
+    //     println(-1);
+    //     return;
+    // }
+
+    // println(two - one);
 }
 
 int32_t main()
 {
-
     // for fast input and output
     ios_base::sync_with_stdio(0);
     cin.tie(0);
