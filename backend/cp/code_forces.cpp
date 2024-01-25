@@ -33,36 +33,52 @@ void inputArr(vi &v)
     }
 }
 
-void solve()
+vector<int> calculatePrefixMultiply(const vector<int> &arr)
 {
-    int a, b, x, y;
-    cin >> a >> b >> x >> y;
+    int n = arr.size();
+    vector<int> prefixMultiply(n, 1);
 
-    int count = 0;
-
-
-    while (1)
+    for (int i = 1; i < n; i++)
     {
-        if(b > y){
-            println(-1);
-            return;
-        }
-        if(a == x || y == b){
-            break;
-        }
-        count++;
-        a++;
-        b++;
+        prefixMultiply[i] = prefixMultiply[i - 1] * arr[i - 1];
     }
 
-    if(b == y){
-    count += abs(x-a);
+    return prefixMultiply;
+}
 
-    }else count += (y-x)*2;
+vector<int> calculateSuffixMultiply(const vector<int> &arr)
+{
+    int n = arr.size();
+    vector<int> suffixMultiply(n, 1);
 
-    println(abs(count));
-    
+    for (int i = n - 2; i >= 0; i--)
+    {
+        suffixMultiply[i] = suffixMultiply[i + 1] * arr[i + 1];
+    }
 
+    return suffixMultiply;
+}
+void solve()
+{
+    int n;
+    cin >> n;
+
+    vi v(n);
+    inputArr(v);
+
+    vector<int> prefixMultiply = calculatePrefixMultiply(v);
+    vector<int> suffixMultiply = calculateSuffixMultiply(v);
+
+    int k = -1;
+    for (int i = 0; i < n; i++)
+    {
+        if (prefixMultiply[i] == suffixMultiply[i]){
+            k = i;    
+            break;
+        }
+         
+    }
+    println(k);
 }
 
 int32_t main()

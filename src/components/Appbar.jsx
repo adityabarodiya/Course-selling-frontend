@@ -5,6 +5,9 @@ import Typography from "@mui/material/Typography";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import React, { useEffect } from "react";
+import "./Appbar.css"; // Import the CSS file
+
+import { navigateToAddCourse, logout, navigateToSignUp, navigateToLogin, fetchData, navigateToMyCourses } from "./helpers/onClickFunctions";
 
 let url = "http://localhost:3000";
 //url = "https://coursra.cyclic.app";
@@ -14,60 +17,37 @@ function Appbar() {
   const [userEmail, setUserEmail] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`${url}/admin/me`, {
-          method: "GET",
-          headers: {
-            Authorization: "Bearer " + localStorage.getItem("token"),
-          },
-        });
-        const data = await response.json();
-        if (data) {
-          console.log(data);
-          setUserEmail(data.username);
-        }
-      } catch (error) {
-        console.error("Error during signup:", error);
-        // Handle the error gracefully, e.g., display an error message to the user
-      }
-    };
 
-    fetchData(); // Call the async function immediately
+    fetchData(setUserEmail); 
+
   }, []); // Empty dependency array means this effect runs once after the initial render
+
 
   if (userEmail) {
     return (
       <>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
-          <div>
+        <div className="container">
+          <div className="title">
             <Typography variant="h6">Coursra</Typography>
           </div>
 
-          <div>
-            {" "}
+          <div className="title">
             <Typography variant="h6">Admin id: {userEmail}</Typography>
           </div>
 
-          <div style={{ display: "flex" }}>
-            <div style={{ marginRight: 10 }}>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  navigate("/addcourse");
-                }}
-              >
+          <div className="buttonContainer">
+            <div className="button">
+              <Button variant="contained" onClick={() => navigateToAddCourse(navigate)}>
                 Add Course
               </Button>
             </div>
-            <div style={{ marginRight: 10 }}>
-              <Button
-                variant="contained"
-                onClick={() => {
-                  localStorage.setItem("token", null);
-                  window.location = "/";
-                }}
-              >
+            <div className="button">
+              <Button variant="contained" onClick={() => navigateToMyCourses(navigate)}>
+                My Courses
+              </Button>
+            </div>
+            <div className="button">
+              <Button variant="contained" onClick={logout}>
                 Logout
               </Button>
             </div>
@@ -79,29 +59,19 @@ function Appbar() {
 
   return (
     <>
-      <div style={{ display: "flex", justifyContent: "space-between" }}>
-        <div>
+      <div className="container">
+        <div className="title">
           <Typography variant="h6">Cursera</Typography>
         </div>
 
-        <div style={{ display: "flex" }}>
-          <div style={{ marginRight: 10 }}>
-            <Button
-              variant="contained"
-              onClick={() => {
-                navigate("/signup");
-              }}
-            >
+        <div className="buttonContainer">
+          <div className="button">
+            <Button variant="contained" onClick={() => navigateToSignUp(navigate)}>
               Sign Up
             </Button>
           </div>
-          <div>
-            <Button
-              variant="contained"
-              onClick={() => {
-                navigate("/login");
-              }}
-            >
+          <div className="button">
+            <Button variant="contained" onClick={() => navigateToLogin(navigate)}>
               Login
             </Button>
           </div>
@@ -111,5 +81,5 @@ function Appbar() {
   );
 }
 
-export {url}
+export { url };
 export default Appbar;

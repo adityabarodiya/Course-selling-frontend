@@ -37,47 +37,72 @@ void inputArr(vi &v)
     }
 }
 
+int findMaxSetBit(int num)
+{
+    if (num == 0)
+    {
+        // Special case when the number is 0
+        return -1; // There is no set bit in this case
+    }
+
+    int position = 0;
+
+    // Loop to find the leftmost set bit
+    while (num > 0)
+    {
+        num = num >> 1; // Right shift to check the next bit
+        position++;
+    }
+
+    return position - 1; // Adjusting for 0-based indexing
+}
+int findMSB(int num)
+{
+    if (num == 0)
+    {
+        // Special case when the number is 0
+        return -1; // There is no set bit in this case
+    }
+
+    int position = 0;
+
+    // Loop to find the leftmost set bit
+    while (num > 0)
+    {
+        num = num >> 1; // Right shift to check the next bit
+        position++;
+    }
+
+    return position - 1; // Adjusting for 0-based indexing
+}
 void solve()
 {
     int n;
     cin >> n;
-    int m;
-    cin>>m;
-    string s;
-    cin>>s;
-    // vi arr(n);
 
-    // inputArr(arr);
+    vi v(v);
+    inputArr(v);
 
-    // int one = 0, two = 0;
-    // int xr = 0;
-    // int e = arr[0];
-    // int f = 1;
+    vi lMul(n);
+    vi rMul(n);
+    lMul[0] = v[0];
+    rMul[n - 1] = v[n - 1];
 
-    // for (int i : arr)
-    // {
-    //     if (e != i)
-    //         f = 0;
+    for (int i = 1; i < n; i++)
+    {
+        lMul[i] = lMul[i + 1] * v[i + 1];
+    }
 
-    //     if (i == 1)
-    //         one++;
-    //     else
-    //         two++;
-    // }
-
-    // if (f)
-    // {
-    //     println(1);
-    //     return;
-    // }
-
-    // if (one > two)
-    // {
-    //     println(-1);
-    //     return;
-    // }
-
-    // println(two - one);
+    for (int i = n - 2; i >= 0; i--)
+    {
+        rMul[i] = rMul[i + 1] * v[i + 1];
+    }
+    int k = -1;
+    for (int i = 0; i < n; i++)
+    {
+        if (lMul[i] == rMul[i])
+            k = i + 1;
+    }
 }
 
 int32_t main()

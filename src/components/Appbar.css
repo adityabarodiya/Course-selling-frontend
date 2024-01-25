@@ -1,0 +1,19 @@
+/* Appbar.css */
+.container {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .title {
+    margin-right: 10px;
+  }
+  
+  .buttonContainer {
+    display: flex;
+    margin-right: 10px;
+  }
+  
+  .button {
+    margin-right: 10px;
+  }
+  
