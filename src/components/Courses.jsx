@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
+import { fetchData } from "./helpers/onClickFunctions";
 
 import { url } from "./Appbar";
 import "./Courese.css";
@@ -9,6 +10,16 @@ import "./Courese.css";
 function Courses() {
   const navigate = useNavigate();
   const [course, setCourse] = useState([]);
+
+  const [userEmail, setUserEmail] = useState(null);
+
+  useEffect(() => {
+
+    fetchData(setUserEmail); 
+
+  }, []);
+
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,6 +35,7 @@ function Courses() {
           const coursesWithNewKey = data.courses.map((course) => ({
             ...course,
             imageLink: "https://www.thinknexttraining.com/images/Full-Stack-Development-Course-in-Chandigargh-mob-min.jpg",
+            createdBy: userEmail
           }));
           setCourse(coursesWithNewKey);
         } else {

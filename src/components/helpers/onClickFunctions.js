@@ -22,6 +22,9 @@ const navigateToAddCourse = (navigate) => {
     navigate("/courses");
   };
 
+  const navigateToHome = (navigate) => {
+    navigate("/");
+  }
   const fetchData = async (setUserEmail) => {
     try {
       const response = await fetch(`${url}/admin/me`, {
@@ -41,5 +44,5 @@ const navigateToAddCourse = (navigate) => {
     }
   };
   
-  export { navigateToAddCourse, logout, navigateToSignUp, navigateToLogin, fetchData, navigateToMyCourses};
+  export { navigateToAddCourse,navigateToHome, logout, navigateToSignUp, navigateToLogin, fetchData, navigateToMyCourses};
   

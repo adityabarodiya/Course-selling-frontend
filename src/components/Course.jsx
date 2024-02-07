@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Card from "@mui/material/Card";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import {url} from "./Appbar"
-
 import Typography from "@mui/material/Typography";
+import { url } from "./Appbar";
 
 function Course() {
-  let { courseId } = useParams();
-  const [courses, setCourse] = useState([]);
+  const { courseId } = useParams();
+  const [courses, setCourses] = useState([]);
+  const [currentCourse, setCurrentCourse] = useState(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,10 +25,12 @@ function Course() {
         if (Array.isArray(data.courses)) {
           const coursesWithNewKey = data.courses.map((course) => ({
             ...course,
-            imageLink:
-              "https://www.thinknexttraining.com/images/Full-Stack-Development-Course-in-Chandigargh-mob-min.jpg",
+            imageLink: "https://www.thinknexttraining.com/images/Full-Stack-Development-Course-in-Chandigargh-mob-min.jpg",
           }));
-          setCourse(coursesWithNewKey);
+          setCourses(coursesWithNewKey);
+
+          const selectedCourse = coursesWithNewKey.find((course) => course._id === courseId);
+          setCurrentCourse(selectedCourse);
         } else {
           console.error("Courses array not found in data:", data);
         }
@@ -37,15 +40,7 @@ function Course() {
     };
 
     fetchData();
-  }, []);
-
-  let currentCourse = null;
-
-  for (let i = 0; i < courses.length; i++) {
-    if (courses[i]._id === courseId) {
-      currentCourse = courses[i];
-    }
-  }
+  }, [courseId]);
 
   if (!currentCourse) {
     return <div>Loading...</div>;
@@ -57,11 +52,7 @@ function Course() {
       <br />
       <div style={{ display: "flex", alignItems: "center" }}>
         <CourseCard currentCourse={currentCourse} />
-        <UpdateCard
-          currentCourse={currentCourse}
-          courses={courses}
-          setCourse={setCourse}
-        ></UpdateCard>
+        <UpdateCard currentCourse={currentCourse} setCourses={setCourses} courses={courses} />
       </div>
     </>
   );
@@ -77,20 +68,41 @@ function CourseCard({ currentCourse }) {
         <Typography textAlign={"center"} variant="subtitle1">
           {currentCourse.description}
         </Typography>
-        <img
-          src={currentCourse.imageLink}
-          style={{ width: 300 }}
-          alt={currentCourse.title}
-        />
+        <img src={currentCourse.imageLink} style={{ width: 300 }} alt={currentCourse.title} />
       </Card>
     </div>
   );
 }
 
-function UpdateCard({ currentCourse, setCourse, courses }) {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
+function UpdateCard({ currentCourse, setCourses }) {
+  const [title, setTitle] = useState(currentCourse.title);
+  const [description, setDescription] = useState(currentCourse.description);
+  const [price, setPrice] = useState(currentCourse.price);
+
+  const handleUpdateCourse = async () => {
+    try {
+      const response = await fetch(`${url}/admin/courses/${currentCourse._id}`, {
+        method: "PUT",
+        body: JSON.stringify({ title, description, price }),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      });
+
+      if (response.ok) {
+        const updatedCourses = courses.map((course) =>
+          course._id === currentCourse._id ? { ...course, title, description, price } : course
+        );
+        setCourses(updatedCourses);
+        alert("Course Updated");
+      } else {
+        console.error("Failed to update course:", response.statusText);
+      }
+    } catch (error) {
+      console.error("Error during course update:", error);
+    }
+  };
 
   return (
     <div style={{ display: "flex" }}>
@@ -103,18 +115,16 @@ function UpdateCard({ currentCourse, setCourse, courses }) {
 
         <Card variant="outlined" style={{ width: 350, padding: 20 }}>
           <TextField
-            onChange={(e) => {
-              setTitle(e.target.value);
-            }}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
             fullWidth={true}
             label="Title"
             variant="outlined"
           />
           <br /> <br />
           <TextField
-            onChange={(e) => {
-              setDescription(e.target.value);
-            }}
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
             fullWidth={true}
             label="Description"
             variant="outlined"
@@ -122,63 +132,21 @@ function UpdateCard({ currentCourse, setCourse, courses }) {
           <br />
           <br />
           <TextField
-            onChange={(e) => {
-              setPrice(e.target.value);
-            }}
+            value={price}
+            onChange={(e) => setPrice(e.target.value)}
             fullWidth={true}
             label="Price"
             variant="outlined"
           />
           <br />
           <br />
-          <Button
-            variant="contained"
-            onClick={() => {
-              // let username = document.getElementById("user").value;
-              // let password = document.getElementById("paas").value;
-
-              fetch(
-                `${url}/admin/courses/` + currentCourse._id,
-                {
-                  method: "PUT",
-                  body: JSON.stringify({
-                    title: title,
-                    description: description,
-                    price: price,
-                  }),
-                  headers: {
-                    "Content-type": "application/json",
-                    Authorization: "Bearer " + localStorage.getItem("token"),
-                  },
-                }
-              )
-                .then((res) => {
-                  return res.json();
-                })
-                .then((data) => {
-                  let updatedCourses = [];
-                  for (let i = 0; i < courses.length; ++i) {
-                    if (courses[i]._id == currentCourse._id) {
-                      updatedCourses.push({
-                        _id: currentCourse._id,
-                        title: title,
-                        description: description,
-                        price: price,
-                        imageLink: courses[i].imageLink,
-                      });
-                    } else updatedCourses.push(courses[i]);
-                  }
-                  setCourse(updatedCourses);
-                  alert("Course Updated");
-                });
-            }}
-          >
+          <Button variant="contained" onClick={handleUpdateCourse}>
             Update Course
           </Button>
-          {/* {JSON.stringify{currentCourse}} */}
         </Card>
       </div>
     </div>
   );
 }
+
 export default Course;

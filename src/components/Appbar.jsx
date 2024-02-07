@@ -7,10 +7,10 @@ import { useState } from "react";
 import React, { useEffect } from "react";
 import "./Appbar.css"; // Import the CSS file
 
-import { navigateToAddCourse, logout, navigateToSignUp, navigateToLogin, fetchData, navigateToMyCourses } from "./helpers/onClickFunctions";
+import { navigateToAddCourse, logout, navigateToHome, navigateToSignUp, navigateToLogin, fetchData, navigateToMyCourses } from "./helpers/onClickFunctions";
 
 let url = "http://localhost:3000";
-//url = "https://coursra.cyclic.app";
+url = "https://coursra.cyclic.app";
 
 function Appbar() {
   const navigate = useNavigate();
@@ -28,7 +28,7 @@ function Appbar() {
       <>
         <div className="container">
           <div className="title">
-            <Typography variant="h6">Coursra</Typography>
+            <Typography variant="h6" onClick= {()=> navigateToHome(navigate)}>Coursra</Typography>
           </div>
 
           <div className="title">
