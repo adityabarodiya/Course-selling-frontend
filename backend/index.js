@@ -55,6 +55,12 @@ import express from "express";
 import jwt from "jsonwebtoken";
 import mongoose from "mongoose";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+
 
 // const jwt = require("jsonwebtoken");
 // const mongoose = require("mongoose");
@@ -240,6 +246,11 @@ app.get("/users/purchasedCourses", authenticateJwt, async (req, res) => {
   } else {
     res.status(403).json({ message: "User not found" });
   }
+});
+
+app.get("/", (req, res) => {
+  app.use(express.static(path.resolve(__dirname, "frontend", "dist")));
+  res.sendFile(path.resolve(__dirname, "frontend", "dist", "index.html"));
 });
 
 app.listen(3000, () => {

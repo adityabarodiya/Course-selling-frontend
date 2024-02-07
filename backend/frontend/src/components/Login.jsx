@@ -59,8 +59,10 @@ function Login() {
                 );
                 const data = await response.json();
                 localStorage.setItem("token", data.token);
-                window.location = "/";
+                console.log(data);
                 alert("Succusfully login");
+
+                window.location = "/";
               } catch (error) {
                 // Handle the error gracefully, e.g., display an error message to the user
 
