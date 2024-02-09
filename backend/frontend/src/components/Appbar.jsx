@@ -9,8 +9,9 @@ import "./Appbar.css"; // Import the CSS file
 
 import { navigateToAddCourse, logout, navigateToHome, navigateToSignUp, navigateToLogin, fetchData, navigateToMyCourses } from "./helpers/onClickFunctions";
 
-let url = windows.location.origin;
+let url = window.location.origin;
 //url = "https://coursra.cyclic.app";
+url = 'http://localhost:3000'
 
 function Appbar() {
   const navigate = useNavigate();
