@@ -8,6 +8,9 @@ import React, { useEffect } from "react";
 import "./Appbar.css"; // Import the CSS file
 
 import { navigateToAddCourse, logout, navigateToHome, navigateToSignUp, navigateToLogin, fetchData, navigateToMyCourses } from "./helpers/onClickFunctions";
+import { useRecoilValue, useSetRecoilState } from "recoil";
+import { userEmailState } from "../store/selectors/userEmal";
+import { userState } from "../store/atom/user";
 
 let url = window.location.origin;
 //url = "https://coursra.cyclic.app";
@@ -15,7 +18,8 @@ url = 'http://localhost:3000'
 
 function Appbar() {
   const navigate = useNavigate();
-  const [userEmail, setUserEmail] = useState(null);
+  const userEmail = useRecoilValue(userEmailState);
+  const setUser = useSetRecoilState(userState);
 
   useEffect(() => {
 

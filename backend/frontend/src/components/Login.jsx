@@ -65,7 +65,6 @@ function Login() {
                 window.location = "/";
               } catch (error) {
                 // Handle the error gracefully, e.g., display an error message to the user
-
                 console.error("Error during Login:", error);
               }
             }}
